@@ -1,0 +1,23 @@
+name: "Reusable Workflow"
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: "Demo branch"
+                required: true
+                default: 'main'
+ 
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+ 
+            - name: Install NPM
+              if: ${{github.event.inputs.branch=='main'}}
+              run: npm install
+             
+            - name: Test NPM
+              if: ${{github.event.inputs.branch=='dev'}}
+              run: npm test

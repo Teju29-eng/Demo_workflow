@@ -1,0 +1,22 @@
+name: Dev Workflow
+ 
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: "Demo Branch"
+                required: true
+                default: dev
+ 
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Install package.JSON
+              run: npm init -y
+            - name: Install Jest
+              run: npm install --save-dev jest
+            - name: Run NPM test
+              run: npm test

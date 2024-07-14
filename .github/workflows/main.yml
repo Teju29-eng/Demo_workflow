@@ -1,0 +1,21 @@
+name: Demo Main Workflow
+ 
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Demo branch'
+                required: true
+                default: 'main'
+ 
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Installed package.JSON
+              run: npm init -y
+            - name: Install NPM
+              run: npm install
+ 

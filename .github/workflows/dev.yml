@@ -6,7 +6,7 @@ on:
             branch:
                 description: "Demo Branch"
                 required: true
-                default: dev
+                default: 'dev'
  
 jobs:
     build:
@@ -19,4 +19,4 @@ jobs:
             - name: Install Jest
               run: npm install --save-dev jest
             - name: Run NPM test
-              run: npm test
+              run: test npm

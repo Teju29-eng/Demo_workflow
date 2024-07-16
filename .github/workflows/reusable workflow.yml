@@ -1,23 +1,28 @@
-name: "Reusable Workflow"
+name: Node.js CI
+
 on:
-    workflow_dispatch:
-        inputs:
-            branch:
-                description: "Demo branch"
-                required: true
-                default: 'main'
- 
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build'
+        required: true
+        default: 'main'
+
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
- 
-            - name: Install NPM
-              if: ${{github.event.inputs.branch=='main'}}
-              run: npm install
-             
-            - name: Test NPM
-              if: ${{github.event.inputs.branch=='dev'}}
-              run: npm test
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies and Test
+      run: |
+        cd Demo_workflow
+        npm install
+        npm test
+      if: github.event_name != 'workflow_dispatch' || github.event.inputs.branch == 'main'

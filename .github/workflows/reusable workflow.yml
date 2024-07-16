@@ -22,7 +22,6 @@ jobs:
 
     - name: Install Dependencies and Test
       run: |
-        cd Demo_workflow
         npm install
         npm test
       if: github.event_name != 'workflow_dispatch' || github.event.inputs.branch == 'main'
